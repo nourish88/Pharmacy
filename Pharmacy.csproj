@@ -1,0 +1,75 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Carter" Version="8.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.9.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Features\Customers\Constants\" />
+    <Folder Include="Application\Features\Customers\Queries\" />
+    <Folder Include="Application\Features\Medicines\Constants\" />
+    <Folder Include="Application\Features\SaleItems\Commands\" />
+    <Folder Include="Application\Features\SaleItems\Constants\" />
+    <Folder Include="Application\Features\SaleItems\Profiles\" />
+    <Folder Include="Application\Features\SaleItems\Queries\" />
+    <Folder Include="Application\Features\Sales\Commands\Delete\" />
+    <Folder Include="Application\Features\Sales\Commands\Update\" />
+    <Folder Include="Application\Features\Sales\Constants\" />
+    <Folder Include="Application\Features\Sales\Profiles\" />
+    <Folder Include="Application\Features\Sales\Queries\" />
+    <Folder Include="Presentation\Products\" />
+    <Folder Include="Presentation\SaleItems\" />
+    <Folder Include="Presentation\Sales\" />
+    <Folder Include="Shared\Pipelines\Transaction\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Shared\corePackages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Shared\corePackages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Shared\corePackages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Shared\corePackages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Shared\corePackages\Core.Application\obj\Core.Application.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="Shared\corePackages\Core.Application\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="Shared\corePackages\Core.CrossCuttingConcers\obj\Core.CrossCuttingConcerns.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="Shared\corePackages\Core.CrossCuttingConcers\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="Shared\corePackages\Core.ElasticSearch\obj\Core.ElasticSearch.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="Shared\corePackages\Core.ElasticSearch\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="Shared\corePackages\Core.Mailing\obj\Core.Mailing.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="Shared\corePackages\Core.Mailing\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="Shared\corePackages\Core.Persistence\obj\Core.Persistence.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="Shared\corePackages\Core.Persistence\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="Shared\corePackages\Core.Security\obj\Core.Security.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="Shared\corePackages\Core.Security\obj\project.assets.json" />
+  </ItemGroup>
+
+</Project>
