@@ -34,10 +34,9 @@
     <Folder Include="Application\Features\Sales\Commands\Update\" />
     <Folder Include="Application\Features\Sales\Constants\" />
     <Folder Include="Application\Features\Sales\Profiles\" />
-    <Folder Include="Application\Features\Sales\Queries\" />
+    <Folder Include="Application\Features\Sales\Queries\GetList\" />
     <Folder Include="Presentation\Products\" />
     <Folder Include="Presentation\SaleItems\" />
-    <Folder Include="Presentation\Sales\" />
     <Folder Include="Shared\Pipelines\Transaction\" />
   </ItemGroup>
 

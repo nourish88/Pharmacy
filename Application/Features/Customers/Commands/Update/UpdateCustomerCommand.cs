@@ -22,10 +22,14 @@ public class UpdateCustomerCommandHandler(IMapper mapper, AppDbContext ctx)
 
     public async Task<UpdatedCustomerResponse?> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
     {
-        var customer = await ctx.Customers.FindAsync(request.Id);
+        var customer = await ctx.Customers.FindAsync(new object?[] { request.Id }, cancellationToken: cancellationToken);
         if (customer is null) return null;
-        var updatedCustomer = mapper.Map<Customer>(request);
-        ctx.Customers.Update(updatedCustomer);
+        customer.Address = request.Address;
+        customer.Name = request.Name;
+        customer.PhoneNumber = request.PhoneNumber;
+        customer.Email = request.Email;
+        
+        ctx.Customers.Update(customer);
         await ctx.SaveChangesAsync(cancellationToken);
         var res = mapper.Map<UpdatedCustomerResponse>(request);
         return res;

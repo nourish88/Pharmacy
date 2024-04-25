@@ -25,9 +25,8 @@ public class CreateSaleCommandHandler(AppDbContext ctx)
             MedicineId= q.MedicineId
             
         }).ToList();
-        var sale = new Sale
+        var sale = new Sale(request.Date)
         {
-            Time = request.Date,
             CustomerId = request.CustomerId,
             SaleItems = saleItems
         };
