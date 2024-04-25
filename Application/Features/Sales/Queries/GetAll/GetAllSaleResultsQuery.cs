@@ -13,7 +13,7 @@ public class GetAllSaleResultsQueryHandler(IMapper mapper, AppDbContext dbContex
     : IRequestHandler<GetAllSaleResultsQuery, List<SaleDto>>
 {
     public async Task<List<SaleDto>> Handle(GetAllSaleResultsQuery request, CancellationToken cancellationToken)
-    {
+    {//sadasds
         var sales = dbContext.Sales;
         var result = new List<SaleDto>();
         var customers = await sales.Include(x => x.SaleItems).ThenInclude(x => x.Medicine).Include(x => x.Customer)
