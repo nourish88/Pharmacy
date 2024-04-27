@@ -10,7 +10,7 @@ namespace Pharmacy.Application.Features.Sales.Queries.DTOs;
 
         public List<SaleItemResponse>? SaleItemResponses { get; set; } 
     };
-
+//
     public sealed record SaleItemResponse(
         string? MedicineName,
         int MedicineId,
