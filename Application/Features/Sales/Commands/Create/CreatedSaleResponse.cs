@@ -17,10 +17,4 @@ public sealed record SaleItemResponse
     public int Amount { get; set; }
 };
 
-public sealed record SaleItemCreateDto
-{
-    
-    public int MedicineId { get; set; }
-    public decimal MedicinePrice { get; set; }
-    public int Amount { get; set; }
-};
+public sealed record SaleItemCreateDto(int MedicineId, int Amount);

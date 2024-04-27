@@ -21,17 +21,19 @@ public class GetAllSaleResultsQueryHandler(IMapper mapper, AppDbContext dbContex
         foreach (var customer in customers)
         {
             var saleItemResponse = customer?.SaleItems.Select(q => new SaleItemResponse
-            {
-                MedicineName = q.Medicine?.Name ?? string.Empty,
-                Amount = q.Amount,
-                MedicineId = q.MedicineId,
-                MedicinePrice = q.Medicine?.Price * q.Amount
-            }).ToList();
+            (
+                MedicineName : q.Medicine?.Name ?? string.Empty,
+                Amount : q.Amount,
+                MedicineId : q.MedicineId,
+                MedicinePrice : q.Medicine?.Price,
+                TotalMedicinePrice:q.Medicine?.Price * q.Amount
+            )).ToList();
 
 
             var response = new SaleDto
             {
                 CustomerName = customer?.Customer?.Name ?? "",
+                CustomerSurName = customer?.Customer?.SurName ?? "",
                 CustomerId = customer!.Customer!.Id,
                 TotalSalePrice = saleItemResponse?.Sum(x => x.TotalMedicinePrice),
                 SaleItemResponses = saleItemResponse

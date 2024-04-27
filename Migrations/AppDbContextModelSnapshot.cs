@@ -35,6 +35,9 @@ namespace Pharmacy.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("SurName")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
@@ -72,7 +75,7 @@ namespace Pharmacy.Migrations
                     b.Property<int>("Month")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("Time")
+                    b.Property<DateOnly>("Time")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Year")
