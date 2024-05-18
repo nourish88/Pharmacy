@@ -35,12 +35,12 @@ public class MedicinesModule : CarterModule
                 return Results.Ok(result);
             return Results.NoContent();
         });
-        app.MapGet("/medicines/{name}", async (string name, ISender sender) =>
+        app.MapGet("/medicines/{name}/{groupName}/{skip}/{take}", async ([FromRoute]string name, [FromRoute] string groupName, [FromRoute] int skip , [FromRoute] int take , ISender sender) =>
         {
-            var result = await sender.Send(new GetByNameMedicineQuery { Name = name });
-            if (result.Medicines.Count > 0)
+            var result = await sender.Send(new GetByNameMedicineQuery { Name = name,GroupName = groupName,Skip = skip, Take = take});
+            
                 return Results.Ok(result);
-            return Results.NoContent();
+          
         });
         app.MapPost("/medicines", async ([FromBody]CreateMedicineCommand request, ISender sender) =>
         {

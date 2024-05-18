@@ -7,7 +7,8 @@ public class CreateCustomerCommandValidator:AbstractValidator<CreateCustomerComm
     public CreateCustomerCommandValidator()
     {
         RuleFor(c => c.Name).NotEmpty().MinimumLength(2);
-        RuleFor(c => c.Email).EmailAddress();
+        RuleFor(c => c.SurName).NotEmpty().MinimumLength(2);
+        RuleFor(c => c.Email).EmailAddress().When(x=>x.Email!=null);
     }
     
 }

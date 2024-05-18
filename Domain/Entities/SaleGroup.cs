@@ -2,13 +2,13 @@
 
 namespace Pharmacy.Domain.Entities;
 
-public class SaleItem : EntityBase
+public class SaleGroup : EntityBase
 {
     public int SaleId { get; set; }
     public Sale? Sale { get; set; }
 
-    public int MedicineId { get; set; }
-    public Medicine? Medicine { get; set; }
+    public int GroupId { get; set; }
+    public Group? Group { get; set; }
 
     public int Amount { get; set; }
 }

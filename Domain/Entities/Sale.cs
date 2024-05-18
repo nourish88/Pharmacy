@@ -4,7 +4,7 @@ namespace Pharmacy.Domain.Entities;
 
 public class Sale : EntityBase
 {
-    public Sale(DateOnly time)
+    public Sale(DateTime time)
     {
         Time = time;
         Day = time.Day;
@@ -13,10 +13,10 @@ public class Sale : EntityBase
     }
     public int CustomerId { get; set; }
     public Customer Customer { get; set; }
-    public DateOnly Time { get; set; }
+    public DateTime Time { get; set; }
     public int Year { get; set; }
     public int Day { get; set; }
     public int Month { get; set; }
-
-    public ICollection<SaleItem> SaleItems { get; set; }
+    public ICollection<SaleGroup>? SaleGroups { get; set; }
+    public ICollection<SaleItem>? SaleItems { get; set; }
 }

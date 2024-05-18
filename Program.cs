@@ -15,10 +15,13 @@ namespace Pharmacy
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+           
             builder.Services.AddCarter();
             builder.Services.AddDbContext<AppDbContext>(opt =>
-                opt.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
-            
+                {
+                    opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
+                    opt.EnableSensitiveDataLogging(true);
+                });
             builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             builder.Services.AddMediatR(configuration =>
             {
@@ -31,7 +34,18 @@ namespace Pharmacy
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    });
+            });
+            //builder.Host.UseWindowsService();
+            //builder.Services.AddWindowsService();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -45,10 +59,10 @@ namespace Pharmacy
             app.MapCarter();
 
 
-          
 
-           
-            
+
+            app.UseCors("AllowAllOrigins");
+
 
             app.Run();
         }

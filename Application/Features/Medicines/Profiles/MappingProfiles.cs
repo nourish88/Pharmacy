@@ -14,7 +14,11 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        CreateMap<Medicine, MedicineViewModel>().ReverseMap();
+        CreateMap<Medicine, MedicineViewModel>().ForMember(
+            dest => dest.GroupName,
+            opt => opt.MapFrom(src => src.Group.Name)
+        ).ReverseMap();
+        CreateMap<Medicine, BaseMedicineViewModel>().ReverseMap();
         CreateMap<Medicine, GetByIdMedicineResponse>().ReverseMap();
         CreateMap<Medicine, CreateMedicineCommand>().ReverseMap();
         CreateMap<Medicine, UpdateMedicineCommand>().ReverseMap();

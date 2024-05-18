@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pharmacy.Infrastructure;
 
@@ -11,9 +12,11 @@ using Pharmacy.Infrastructure;
 namespace Pharmacy.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240516081616_group")]
+    partial class group
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,8 +89,6 @@ namespace Pharmacy.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupId");
-
                     b.ToTable("Medicines");
                 });
 
@@ -147,15 +148,6 @@ namespace Pharmacy.Migrations
                     b.ToTable("SaleItems");
                 });
 
-            modelBuilder.Entity("Pharmacy.Domain.Entities.Medicine", b =>
-                {
-                    b.HasOne("Pharmacy.Domain.Entities.Group", "Group")
-                        .WithMany("Medicines")
-                        .HasForeignKey("GroupId");
-
-                    b.Navigation("Group");
-                });
-
             modelBuilder.Entity("Pharmacy.Domain.Entities.Sale", b =>
                 {
                     b.HasOne("Pharmacy.Domain.Entities.Customer", "Customer")
@@ -184,11 +176,6 @@ namespace Pharmacy.Migrations
                     b.Navigation("Medicine");
 
                     b.Navigation("Sale");
-                });
-
-            modelBuilder.Entity("Pharmacy.Domain.Entities.Group", b =>
-                {
-                    b.Navigation("Medicines");
                 });
 
             modelBuilder.Entity("Pharmacy.Domain.Entities.Sale", b =>

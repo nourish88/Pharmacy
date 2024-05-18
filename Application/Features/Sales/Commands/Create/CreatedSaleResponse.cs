@@ -17,4 +17,4 @@ public sealed record SaleItemResponse
     public int Amount { get; set; }
 };
 
-public sealed record SaleItemCreateDto(int MedicineId, int Amount);
+public sealed record SaleItemCreateDto(int Id, int Amount);

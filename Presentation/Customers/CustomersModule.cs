@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pharmacy.Application.Features.Customers.Commands.Create;
 using Pharmacy.Application.Features.Customers.Commands.Delete;
 using Pharmacy.Application.Features.Customers.Commands.Update;
+using Pharmacy.Application.Features.Customers.Queries.Get;
 using Pharmacy.Application.Features.Customers.Queries.GetAll;
 using Pharmacy.Application.Features.Customers.Queries.GetById;
 using Pharmacy.Application.Features.Customers.Queries.GetByName;
@@ -22,12 +23,25 @@ public class CustomersModule : CarterModule
                 return Results.Ok(result);
             return Results.NoContent();
         });
-        app.MapGet("/customers", async ( ISender sender) =>
+        app.MapGet("/customers/all", async ( ISender sender) =>
         {
             var result = await sender.Send(new GetAllCustomersQuery ());
             if (result.Customers.Any())
                 return Results.Ok(result);
             return Results.NoContent();
+        });
+        app.MapGet("/customers", async (ISender sender) =>
+        {
+            var result = await sender.Send(new GetBaseCustomersQuery());
+            if (result.Customers.Any())
+                return Results.Ok(result);
+            return Results.NoContent();
+        });
+        app.MapPost("/get-customers", async ([FromBody] GetCustomersQuery request, ISender sender) =>
+        { var result = await sender.Send(request);
+            
+                return Results.Ok(result);
+          
         });
         app.MapGet("/customers/{name}", async (string name, ISender sender) =>
         {
@@ -39,7 +53,8 @@ public class CustomersModule : CarterModule
         app.MapPost("/customers", async ([FromBody]CreateCustomerCommand request, ISender sender) =>
         {
             var result = await sender.Send(request);
-            return Results.Ok(result);
+           
+            return Results.Created($"customer/{result.Id}", result);
         });
         app.MapPut("/customers", async ([FromBody]UpdateCustomerCommand request, ISender sender) =>
         {

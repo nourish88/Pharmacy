@@ -16,7 +16,7 @@ public class GetAllMedicinessQueryHandler(IMapper mapper, AppDbContext dbContext
         var customerRepo = dbContext.Medicines;
         var  customer = await customerRepo.ToListAsync(cancellationToken: cancellationToken);
 
-        var response = mapper.Map<List<MedicineViewModel>>(customer);
+        var response = mapper.Map<List<BaseMedicineViewModel>>(customer);
         var model = new GetAllMedicinesResponse { Medicines = response };
         return model;
     }

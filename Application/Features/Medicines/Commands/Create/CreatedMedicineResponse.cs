@@ -1,4 +1,4 @@
-﻿namespace Pharmacy.Application.Features.Customers.Commands.Create;
+﻿namespace Pharmacy.Application.Features.Medicines.Commands.Create;
 
-public record CreatedMedicineResponse(int Id,string? Name, decimal? Price);
+public record CreatedMedicineResponse(int Id,string? Name, decimal? Price,int GroupId,string Message="İşlem Başarılı");
 

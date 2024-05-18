@@ -4,34 +4,41 @@ using Pharmacy.Infrastructure;
 
 namespace Pharmacy.Application.Features.Sales.Commands.Create;
 
-public class CreateSaleCommand:IRequest<int>
+public sealed record CreatedSaleRespond(int? Id, string? Message = "İşlem Başarılı");
+public class CreateSaleCommand : IRequest<CreatedSaleRespond>
 {
     public int CustomerId { get; set; }
-    public DateOnly Date { get; set; }
+    public string Date { get; set; }
     public List<SaleItemCreateDto> SaleItemCreateDtos { get; set; }
 }
 
 public class CreateSaleCommandHandler(AppDbContext ctx)
-    : IRequestHandler<CreateSaleCommand, int >
+    : IRequestHandler<CreateSaleCommand, CreatedSaleRespond>
 {
 
 
-    public async Task<int> Handle(CreateSaleCommand request, CancellationToken cancellationToken)
+    public async Task<CreatedSaleRespond> Handle(CreateSaleCommand request, CancellationToken cancellationToken)
     {
         var sales = ctx.Sales;
+    
         var saleItems = request.SaleItemCreateDtos.Select(q => new SaleItem
         {
             Amount = q.Amount,
-            MedicineId= q.MedicineId
-            
+            MedicineId = q.Id
+
         }).ToList();
-        var sale = new Sale(request.Date)
+
+        var date = Convert.ToDateTime(request.Date);
+        var sale = new Sale(date)
         {
             CustomerId = request.CustomerId,
             SaleItems = saleItems
         };
+
         await sales.AddAsync(sale, cancellationToken);
         await ctx.SaveChangesAsync(cancellationToken);
-        return sale.Id;
+         return new CreatedSaleRespond(sale.Id);
+
+
     }
 }
